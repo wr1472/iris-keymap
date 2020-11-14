@@ -37,13 +37,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RS] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     UK_TILD, UK_HASH, KC_LPRN, KC_RPRN, KC_UNDS, KC_MINS,                            KC_PLUS, KC_EQL,  KC_P7,   KC_P8,   KC_P9,   KC_PMNS,
+     UK_TILD, UK_NOT,  KC_LPRN, KC_RPRN, KC_UNDS, KC_MINS,                            KC_PLUS, KC_EQL,  KC_P7,   KC_P8,   KC_P9,   KC_PMNS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_PGUP, KC_UP,   KC_HOME, KC_END,  UK_BSLS, ALT_SFT_TAB,                        TO(_RS), TO(_LW), KC_P4,   KC_P5,   KC_P6,   KC_PPLS,
+     KC_PGUP, KC_UP,   KC_HOME, KC_END,  KC_PGDN, ALT_SFT_TAB,                        TO(_RS), TO(_LW), KC_P4,   KC_P5,   KC_P6,   KC_PPLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LEFT, KC_DOWN, KC_RGHT, UK_DOT,  KC_COMM, ALT_TAB,                            _______, UK_RABK, KC_P1,   KC_P2,   KC_P3,   KC_PAST,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_PGDN, UK_PIPE, UK_AT,  UK_DQUO,  KC_QUOT, _______, KC_DEL,           _______, _______, UK_LABK, KC_P0,   KC_PENT, KC_PDOT, KC_PSLS,
+     UK_BRKP,  UK_HASH, UK_AT,   UK_DQUO,  KC_QUOT, _______, KC_DEL,          _______, _______, UK_LABK, KC_P0,   KC_PENT, KC_PDOT, KC_PSLS,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   KC_SPC,  _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -51,15 +51,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  
   [_LW] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,                            _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
+     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_CALC,                            _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     BL_TOGG, BL_STEP, BL_BRTG, _______, _______, _______,                            TO(_RS), TO(_LW), KC_PSCR, KC_CAPS, KC_F11,  KC_F12,
+     BL_TOGG, BL_STEP, BL_BRTG, KC_PSCR, KC_CAPS, _______,                            TO(_RS), TO(_LW), UK_ASTR, UK_PIPE, KC_F11,  KC_F12,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _______,                            KC_TAB,  UK_SCLN, UK_QUES, KC_APP,  KC_WSTP, KC_WREF,
+     RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _______,                            KC_TAB,  UK_QUES, UK_SCLN, UK_AMPR, KC_WSTP, KC_WREF,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     RESET,   DEBUG,   RGB_HUD, RGB_SAD, RGB_VAD, _______, KC_INS,           _______, _______, UK_COLN, UK_NOT,  KC_CALC, KC_WBAK, KC_WFWD,
+     RESET,   DEBUG,   RGB_HUD, RGB_SAD, RGB_VAD, _______, KC_INS,           _______, _______, UK_EXLM, UK_COLN, UK_BSLS, KC_WBAK, KC_WFWD,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, KC_ENT,                    _______, _______, _______
+                                    _______, _______, KC_ENT,                    KC_APP,  _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )//,
 
