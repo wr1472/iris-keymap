@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include "keymap_uk.h"
 
 
 #define _QWERTY 0
@@ -12,7 +13,7 @@ enum custom_keycodes {
   RS,
 //   AJ,
   ALT_TAB,
-  ALT_SFT_TAB,
+  ALT_SFT_TAB
 };
 
 bool is_alt_tab_active = false;
@@ -36,13 +37,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RS] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_QUOT, KC_NUHS, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS,                            KC_MINS, KC_EQL,  KC_P7,   KC_P8,   KC_P9,   KC_PMNS,
+     UK_TILD, UK_HASH, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS,                            KC_MINS, KC_EQL,  KC_P7,   KC_P8,   KC_P9,   KC_PMNS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_PSCR, KC_UP,  KC_INS,  KC_HOME, KC_PGUP,  ALT_SFT_TAB,                        TO(_RS), TO(_LW), KC_P4,   KC_P5,   KC_P6,   KC_PPLS,
+     UK_BSLS, KC_UP,   KC_INS,  KC_HOME, KC_PGUP, ALT_SFT_TAB,                        TO(_RS), TO(_LW), KC_P4,   KC_P5,   KC_P6,   KC_PPLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_PGDN, ALT_TAB,                            _______,  KC_BSLS, KC_P1,   KC_P2,   KC_P3,   KC_PAST,
+     KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_PGDN, ALT_TAB,                            _______, UK_SCLN, KC_P1,   KC_P2,   KC_P3,   KC_PAST,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TILD, KC_BSLS, KC_PIPE, KC_AT,   KC_DQT,  _______, KC_DEL,           _______, _______, KC_CAPS, KC_P0,   KC_PENT, KC_PDOT, KC_PSLS,
+     UK_PIPE, UK_AT,   KC_QUOT, UK_DQUO, UK_DOT,  _______, KC_DEL,           _______, _______, UK_COLN, KC_P0,   KC_PENT, KC_PDOT, KC_PSLS,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______,  _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -52,11 +53,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,                            _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     BL_TOGG, BL_STEP, BL_BRTG, _______, _______, _______,                            TO(_RS), TO(_LW), _______, _______, KC_F11,  KC_F12,
+     BL_TOGG, BL_STEP, BL_BRTG, _______, _______, _______,                            TO(_RS), TO(_LW), KC_PSCR, KC_CAPS, KC_F11,  KC_F12,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _______,                            KC_TAB,  KC_APP,  KC_WSTP, KC_WREF, _______, RESET,
+     RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _______,                            KC_TAB,  UK_RABK, UK_QUES, KC_APP,  KC_WSTP, KC_WREF,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, RGB_HUD, RGB_SAD, RGB_VAD, _______, _______,          _______, _______, KC_CALC, KC_WBAK, KC_WFWD, _______, DEBUG,
+     RESET,   DEBUG,   RGB_HUD, RGB_SAD, RGB_VAD, _______, _______,          _______, _______, UK_LABK, UK_NOT,  KC_CALC, KC_WBAK, KC_WFWD,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -96,6 +97,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_setrgb(RGB_BLUE);
         // update_tri_layer(_LW, _RS, _AJ);
       }
+
       return false;
       break;
     case RS:
@@ -108,6 +110,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_setrgb(RGB_BLUE);
         // update_tri_layer(_LW, _RS, _AJ);
       }
+
       return false;
       break;
     // case AJ:
@@ -130,6 +133,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         unregister_code(KC_TAB);
       }
+
       break;
    case ALT_SFT_TAB:
       if (record->event.pressed) {
@@ -143,6 +147,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         unregister_code(KC_TAB);
       }
+
       break;
   }
 
