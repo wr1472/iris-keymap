@@ -2,7 +2,7 @@
 #include "keymap_uk.h"
 
 
-#define _QWERTY 0
+#define _QW 0
 #define _RS 1  // RAISE
 #define _LW 2  // LOWER
 // #define _AJ 3  // ADJUST
@@ -21,7 +21,7 @@ uint16_t alt_tab_timer = 0;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [_QWERTY] = LAYOUT(
+  [_QW] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_ESC,                             KC_LBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -68,19 +68,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
-        set_single_persistent_default_layer(_QWERTY);
-        // rgblight_setrgb(RGB_BLUE);
+        set_single_persistent_default_layer(_QW);
       }
       return false;
       break;
     case LW:
       if (record->event.pressed) {
         layer_on(_LW);
-        // rgblight_setrgb(RGB_RED);
         // update_tri_layer(_LW, _RS, _AJ);
       } else {
         layer_off(_LW);
-        // rgblight_setrgb(RGB_BLUE);
         // update_tri_layer(_LW, _RS, _AJ);
       }
 
@@ -89,11 +86,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RS:
       if (record->event.pressed) {
         layer_on(_RS);
-        // rgblight_setrgb(RGB_GREEN);
         // update_tri_layer(_LW, _RS, _AJ);
       } else {
         layer_off(_RS);
-        // rgblight_setrgb(RGB_BLUE);
         // update_tri_layer(_LW, _RS, _AJ);
       }
 
@@ -131,11 +126,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-void matrix_init_user(void) {
-    rgblight_mode(1);
-    rgblight_setrgb(RGB_BLUE);
-}
-
 void matrix_scan_user(void) {
   if (is_alt_tab_active && timer_elapsed(alt_tab_timer) > 500) {
       unregister_code(KC_LALT);
@@ -162,21 +152,38 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 }
 
  /* Lighting */
-const rgblight_segment_t PROGMEM rs_layer[] = RGBLIGHT_LAYER_SEGMENTS({1, 12, RGB_GREEN});
-const rgblight_segment_t PROGMEM lw_layer[] = RGBLIGHT_LAYER_SEGMENTS({1, 12, RGB_PURPLE});
+const rgblight_segment_t PROGMEM qw_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 12, HSV_BLUE});
+const rgblight_segment_t PROGMEM rs_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 12, HSV_GREEN});
+const rgblight_segment_t PROGMEM lw_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 12, HSV_RED});
+const rgblight_segment_t PROGMEM caps_lock[] = RGBLIGHT_LAYER_SEGMENTS(
+    {4, 3, HSV_GOLD},
+    {10, 3, HSV_GOLD}
+);
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    qw_layer,
     rs_layer,
-    lw_layer
+    lw_layer,
+    caps_lock
 );
+
+void matrix_init_user(void) {
+    rgblight_mode(1);
+}
 
 void keyboard_post_init_user(void) {
     rgblight_layers = rgb_layers;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    rgblight_set_layer_state(1, layer_state_cmp(state, 1));
-    rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+    rgblight_set_layer_state(0, layer_state_cmp(state, _QW));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _RS));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _LW));
 
     return state;
+}
+
+bool led_update_user(led_t led_state) {
+    rgblight_set_layer_state(3, led_state.caps_lock);
+    return true;
 }
